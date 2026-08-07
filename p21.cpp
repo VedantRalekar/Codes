@@ -5,31 +5,32 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
-        vector<int> a(n);
-        for(int &x  : a) cin>>x;
-        
-        int neg = 0, pos = 0;
-
-        for(int x : a){
-            if(x > 0) pos++;
-            else neg++;
-        }
-
-        if(n%2 != 0){
-            cout<<"NO"<<endl;
-        }else{
-            if( neg == pos){
-                cout<<"YES"<<endl;
-            }
-            else if(abs(neg - pos) % 4 == 0){
-                cout<<"YES"<<endl;
-            }else {
-                cout<<"NO"<<endl;
+       int n;
+       cin>>n;
+       string s;
+       cin>>s;
+       
+       bool del1 = false, del2 = false;
+       for(int i=1;i<n-1;i++){
+            if(s[i] != s[i-1] && s[i] != s[i+1]){
+                if(s[i-1] == s[i+1]) del2 = true;
+                else del1 = true;
             }
         }
+       
+       int ans = 1;
+       for(int i=1;i<n;i++){
+        if(s[i] != s[i-1]){
+           ans++;
+       }
+    }
+       if(del2){
+          ans -= 2;
+       }else if(del1){
+        ans -= 1;
+       }
 
+       cout<<ans<<endl;
     }
     return 0;
 }
